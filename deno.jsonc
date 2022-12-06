@@ -1,0 +1,14 @@
+{
+  "fmt": {
+    "files": {
+      "include": [
+        "src",
+        "deno.jsonc",
+        "package.json"
+      ],
+      "exclude": [
+        "node_modules"
+      ]
+    }
+  }
+}
