@@ -1,13 +1,8 @@
 import React, {
-  EventHandler,
-  MouseEventHandler,
   ReactElement,
   useState,
 } from "react";
-import Draggable, {
-  DraggableEvent,
-  DraggableEventHandler,
-} from "react-draggable";
+import Draggable from "react-draggable";
 import "./App.css";
 
 type Position = {
@@ -294,6 +289,7 @@ type RemWrapperProps = {
 
 const RemWrapper: React.FC<RemWrapperProps> = (props): JSX.Element => {
   const { style, remBaseline = 16, children } = props;
+  const child = React.Children.only(children);
 
   const translateTransformToRem = (
     transform: Transform,
@@ -301,25 +297,23 @@ const RemWrapper: React.FC<RemWrapperProps> = (props): JSX.Element => {
   ): string => {
     const convertedValues = transform.replace("translate(", "").replace(")", "")
       .split(",")
-      .map((px: any) => px.replace("px", ""))
-      .map((px: any) => parseInt(px, 10) / remBaseline)
+      .map((px: string) => px.replace("px", ""))
+      .map((px: string) => parseInt(px, 10) / remBaseline)
       .map((x: number) => `${x}rem`);
     const [x, y] = convertedValues;
 
     return `translate(${x}, ${y})`;
   };
 
-  const child = React.Children.only(children);
-
   const editedStyle = {
     ...child.props.style,
     ...style,
-    transform: style && translateTransformToRem(style.transform, remBaseline),
+    transform: style && translateTransformToRem(style?.transform, remBaseline)
   };
 
   return React.cloneElement(child, {
     ...child.props,
-    props,
+    ...props,
     style: editedStyle,
   });
 };
