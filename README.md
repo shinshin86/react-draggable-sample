@@ -1,3 +1,8 @@
+# react-draggable-sample
+
+This is a rewriting [example of react-draggable](https://github.com/react-grid-layout/react-draggable/blob/master/example/example.js) into a function component.
+
+-----------------
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
